@@ -41,7 +41,7 @@ export const useCropper = () => {
 
 interface SaveOptions {
     /**
-     * defaults to base64
+     * defaults to uri
      */
     type?: 'uri' | 'base64',
     /**
