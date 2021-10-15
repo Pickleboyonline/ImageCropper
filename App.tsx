@@ -48,6 +48,7 @@ const App = () => {
     try {
       let result = await save()
       console.log(result)
+      console.warn('save executed, check console logs')
     } catch (e: any) {
       console.error(e)
     }
@@ -61,7 +62,7 @@ const App = () => {
         onPress={handleOnPress} />
 
       <CropperView
-        url="https://www.guidedogs.org/wp-content/uploads/2019/11/website-donate-mobile.jpg"
+        url="https://images.theconversation.com/files/377569/original/file-20210107-17-q20ja9.jpg?ixlib=rb-1.1.0&rect=278%2C340%2C4644%2C3098&q=45&auto=format&w=926&fit=clip"
       />
     </SafeAreaView>
   );

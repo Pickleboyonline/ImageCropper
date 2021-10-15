@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
-import { requireNativeComponent, NativeModules, Image, Text, Alert } from 'react-native';
+import React, { FC, useEffect, useState } from 'react';
+import { NativeModules, Image, Text, Alert } from 'react-native';
 const { CropperModule } = NativeModules;
 import RNFS from 'react-native-fs';
-
+import NativeTOCropperView from './NativeTOCropperView';
 
 interface CropperViewProps {
     /**
@@ -14,19 +14,35 @@ interface CropperViewProps {
 
 // TODO: Allow multiple instances of CropperViews per app run
 // TODO: Create bindings to customize Native TOCropper toolbar
+// let NativeTOCropperView = requireNativeComponent('IMGCropper');
 const CropperView: FC<CropperViewProps> = (props) => {
     const { url } = props;
+    const [hasSetup, setHasSetup] = useState(false)
     // let defaultPuppyUrl = "https://www.guidedogs.org/wp-content/uploads/2019/11/website-donate-mobile.jpg";
-    CropperModule.setImageUrl(url)
 
-    let NativeTOCropperView = requireNativeComponent('IMGCropper');
 
-    return <NativeTOCropperView
-        {...{
-            style: {
-                flex: 1
-            }
-        }} />
+    useEffect(() => {
+        async function setup() {
+            await CropperModule.setImageUrl(url);
+            setHasSetup(true)
+        }
+        if (!hasSetup) setup()
+    }, [])
+
+    if (hasSetup) {
+        return <NativeTOCropperView
+            {...{
+                style: {
+                    flex: 1
+                }
+            }} />
+    } else {
+        return <></>
+    }
+
+
+
+
 }
 
 /**
