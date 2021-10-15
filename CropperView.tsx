@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { requireNativeComponent, NativeModules, Image, Text, Alert } from 'react-native';
 const { CropperModule } = NativeModules;
 import RNFS from 'react-native-fs';
-export const getCroppedImageUri = CropperModule.getCroppedImageUri as (trash: boolean) => Promise<string>;
 
 
 interface CropperViewProps {
